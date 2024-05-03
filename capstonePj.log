@@ -1,0 +1,7 @@
+2024-05-03T11:36:18.883+02:00  WARN 22852 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-03T11:36:18.947+02:00  WARN 22852 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 93113838-1f51-45d0-afa9-5a1bb871a53c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
