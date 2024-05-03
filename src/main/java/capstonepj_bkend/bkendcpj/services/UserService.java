@@ -3,6 +3,7 @@ package capstonepj_bkend.bkendcpj.services;
 import capstonepj_bkend.bkendcpj.entities.Role;
 import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
+import capstonepj_bkend.bkendcpj.payloads.ProfileImageUrlDTO;
 import capstonepj_bkend.bkendcpj.payloads.SocialDTO;
 import capstonepj_bkend.bkendcpj.payloads.UserDTO;
 import capstonepj_bkend.bkendcpj.repositories.UserRepository;
@@ -110,6 +111,12 @@ public class UserService {
     public User uploadSocial(UUID id, SocialDTO socialDTO){
         User existingUser = uRepo.findById(id).orElseThrow(() -> new BadRequestException("User not found"));
         existingUser.setSocial(socialDTO.social());
+        return uRepo.save(existingUser);
+    }
+
+    public User uploadProfileImageWithUrl(UUID id, ProfileImageUrlDTO profileImageUrlDTO) {
+        User existingUser = uRepo.findById(id).orElseThrow(() -> new BadRequestException("User not found"));
+        existingUser.setProfileImage(profileImageUrlDTO.profileImage());
         return uRepo.save(existingUser);
     }
 

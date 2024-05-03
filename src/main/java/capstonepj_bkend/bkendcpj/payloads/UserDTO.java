@@ -30,10 +30,5 @@ public record UserDTO(
         @Size(min = 3, message = "City must at least 3 characters long")
         String city
 
-//        @NotBlank(message = "Social is required")
-//        @Size(min = 3, message = "City must at least 3 characters long")
-//        String social,
-
-//        String profileImage
 ) {
 }

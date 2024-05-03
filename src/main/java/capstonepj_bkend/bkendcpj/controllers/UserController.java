@@ -2,6 +2,7 @@ package capstonepj_bkend.bkendcpj.controllers;
 
 import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
+import capstonepj_bkend.bkendcpj.payloads.ProfileImageUrlDTO;
 import capstonepj_bkend.bkendcpj.payloads.SocialDTO;
 import capstonepj_bkend.bkendcpj.payloads.UserDTO;
 import capstonepj_bkend.bkendcpj.services.UserService;
@@ -49,6 +50,14 @@ public class UserController {
             throw new BadRequestException("Invalid data", validation.getAllErrors());
         }
         return uService.uploadSocial(id, socialDTO);
+    }
+
+    @PutMapping("/{id}/profileImage")
+    public User updateProfileImage(@PathVariable UUID id, @RequestBody @Validated ProfileImageUrlDTO piDTO, BindingResult validation) {
+        if (validation.hasErrors()) {
+            throw new BadRequestException("Invalid data", validation.getAllErrors());
+        }
+        return uService.uploadProfileImageWithUrl(id, piDTO);
     }
 
     @DeleteMapping("/{id}")
