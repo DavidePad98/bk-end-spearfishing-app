@@ -57,8 +57,6 @@ public class UserService {
         newUser.setCity(uDTO.city());
         newUser.setRole(role);
         newUser.setRegistrationDate(LocalDateTime.now());
-//        newUser.setSocial(uDTO.social());
-//        newUser.setProfileImage(uDTO.profileImage());
 
         return uRepo.save(newUser);
     }
@@ -81,8 +79,6 @@ public class UserService {
         newUser.setCity(uDTO.city());
         newUser.setRole(role);
         newUser.setRegistrationDate(newUser.getRegistrationDate());
-//        newUser.setSocial(uDTO.social());
-//        newUser.setProfileImage(uDTO.profileImage());
 
         return uRepo.save(newUser);
     }
@@ -102,8 +98,6 @@ public class UserService {
         existingUser.setEmail(uDTO.email());
         existingUser.setPassword(passwordEncoder.encode(uDTO.password()));
         existingUser.setCity(uDTO.city());
-//        existingUser.setSocial(uDTO.social());
-//        existingUser.setProfileImage(uDTO.profileImage());
 
         return uRepo.save(existingUser);
     }

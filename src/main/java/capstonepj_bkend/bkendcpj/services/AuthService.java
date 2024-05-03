@@ -4,6 +4,7 @@ import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.UnauthorizedException;
 import capstonepj_bkend.bkendcpj.payloads.JWTDTO;
 import capstonepj_bkend.bkendcpj.payloads.LoginAuthDTO;
+import capstonepj_bkend.bkendcpj.payloads.LoginResponseDTO;
 import capstonepj_bkend.bkendcpj.payloads.UserDTO;
 import capstonepj_bkend.bkendcpj.security.JWTTools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +26,17 @@ public class AuthService {
             throw new UnauthorizedException("Credentials not valid. Try login again");
         }
         String token = jwtTools.generateToken(user);
-        UserDTO uDTO = new UserDTO(
+        LoginResponseDTO lrDTO = new LoginResponseDTO(
                 user.getNickname(),
                 user.getName(),
                 user.getSurname(),
                 user.getEmail(),
                 passwordEncoder.encode(user.getPassword()),
-                user.getCity()
-//                user.getSocial(),
-//                user.getProfileImage()
+                user.getCity(),
+                user.getSocial(),
+                user.getProfileImage()
                 );
-        return new JWTDTO(token, uDTO);
+        return new JWTDTO(token, lrDTO);
     }
 
 }

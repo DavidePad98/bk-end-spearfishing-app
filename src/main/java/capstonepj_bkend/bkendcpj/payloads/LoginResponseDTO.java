@@ -2,11 +2,11 @@ package capstonepj_bkend.bkendcpj.payloads;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
-public record UserDTO(
+public record LoginResponseDTO(
+
         @NotBlank(message = "Nickname is required")
         @Size(min = 3, message = "Nickname must at least 3 characters long")
         String nickname,
@@ -29,7 +29,15 @@ public record UserDTO(
 
         @NotBlank(message = "City is required")
         @Size(min = 3, message = "City must at least 3 characters long")
-        String city
+        String city,
+
+        @NotBlank(message = "Social is required")
+        @Size(min = 3, message = "City must at least 3 characters long")
+        String social,
+
+        @NotBlank(message = "Profile image url is required")
+        @URL(message = "Invalid url")
+        String profileImage
 
 ) {
 }

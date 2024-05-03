@@ -32,7 +32,7 @@ public class AuthController {
     }
 
 
-    @PostMapping("register")
+    @PostMapping("registration")
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody @Validated UserDTO userDTO, BindingResult validation) {
         if (validation.hasErrors()) {
