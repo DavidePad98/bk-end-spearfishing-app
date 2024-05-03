@@ -3,6 +3,7 @@ package capstonepj_bkend.bkendcpj.services;
 import capstonepj_bkend.bkendcpj.entities.Role;
 import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
+import capstonepj_bkend.bkendcpj.payloads.SocialDTO;
 import capstonepj_bkend.bkendcpj.payloads.UserDTO;
 import capstonepj_bkend.bkendcpj.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +104,12 @@ public class UserService {
 //        existingUser.setSocial(uDTO.social());
 //        existingUser.setProfileImage(uDTO.profileImage());
 
+        return uRepo.save(existingUser);
+    }
+
+    public User uploadSocial(UUID id, SocialDTO socialDTO){
+        User existingUser = uRepo.findById(id).orElseThrow(() -> new BadRequestException("User not found"));
+        existingUser.setSocial(socialDTO.social());
         return uRepo.save(existingUser);
     }
 

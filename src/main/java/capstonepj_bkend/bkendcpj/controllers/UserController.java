@@ -2,6 +2,7 @@ package capstonepj_bkend.bkendcpj.controllers;
 
 import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
+import capstonepj_bkend.bkendcpj.payloads.SocialDTO;
 import capstonepj_bkend.bkendcpj.payloads.UserDTO;
 import capstonepj_bkend.bkendcpj.services.UserService;
 import jakarta.annotation.security.PermitAll;
@@ -40,6 +41,14 @@ public class UserController {
             throw new BadRequestException("Invalid data", validation.getAllErrors());
         }
         return uService.updateUser(id, utenteDTO);
+    }
+
+    @PutMapping("/{id}/social")
+    public User updateSocial(@PathVariable UUID id, @RequestBody @Validated SocialDTO socialDTO, BindingResult validation) {
+        if (validation.hasErrors()) {
+            throw new BadRequestException("Invalid data", validation.getAllErrors());
+        }
+        return uService.uploadSocial(id, socialDTO);
     }
 
     @DeleteMapping("/{id}")
