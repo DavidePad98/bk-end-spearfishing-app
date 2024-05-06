@@ -5,38 +5,26 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
+import java.util.UUID;
+
 public record LoginResponseDTO(
 
-        @NotBlank(message = "Nickname is required")
-        @Size(min = 3, message = "Nickname must at least 3 characters long")
+        UUID user_id,
+
         String nickname,
 
-        @NotBlank(message = "Name is required")
-        @Size(min = 3, message = "Name must at least 3 characters long")
         String name,
 
-        @NotBlank(message = "Surname is required")
-        @Size(min = 3, message = "Surname must at least 3 characters long")
         String surname,
 
-        @NotBlank(message = "Email is required")
-        @Email
         String email,
 
-        @NotBlank(message = "Password is required")
-        @Size(min = 8, message = "Password must at least 8 characters long")
         String password,
 
-        @NotBlank(message = "City is required")
-        @Size(min = 3, message = "City must at least 3 characters long")
         String city,
 
-        @NotBlank(message = "Social is required")
-        @Size(min = 3, message = "City must at least 3 characters long")
         String social,
 
-        @NotBlank(message = "Profile image url is required")
-        @URL(message = "Invalid url")
         String profileImage
 
 ) {

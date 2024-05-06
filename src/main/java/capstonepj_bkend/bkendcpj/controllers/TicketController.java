@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -32,11 +33,6 @@ public class TicketController {
     public Ticket getTicketCoversation(@PathVariable UUID id) {
         return tService.getTicketCoversation(id);
     }
-
-//    @GetMapping("/{id}/posts")
-//    public List<Post> findPostsByTicketId(@PathVariable UUID ticketId) {
-//        return tService.findPostsByTicketId(ticketId);
-//    }
 
     @GetMapping("/title/{title}")
     public Ticket findByTicketTitle(@PathVariable String title) {
@@ -61,5 +57,10 @@ public class TicketController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTicketCoversation(@PathVariable UUID id) {
         tService.deleteTicketCoversation(id);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Ticket> getTicketsByUserId(@PathVariable UUID userId) {
+        return tService.getTicketsByUserId(userId);
     }
 }

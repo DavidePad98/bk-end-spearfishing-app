@@ -27,6 +27,7 @@ public class AuthService {
         }
         String token = jwtTools.generateToken(user);
         LoginResponseDTO lrDTO = new LoginResponseDTO(
+                user.getId(),
                 user.getNickname(),
                 user.getName(),
                 user.getSurname(),

@@ -26,10 +26,6 @@ public class TicketService {
     @Autowired
     private UserService uService;
 
-//    public List<Post> findPostsByTicketId(UUID ticketId) {
-//        return tRepo.findPostsByTicket(ticketId);
-//    }
-
     public Ticket getTicketCoversation(UUID id) {
         return tRepo.findById(id).orElseThrow(() -> new BadRequestException("Ticket not found"));
     }
@@ -63,5 +59,9 @@ public class TicketService {
 //        }
         existingTicket.setTitle(tk.title());
         return tRepo.save(existingTicket);
+    }
+
+    public List<Ticket> getTicketsByUserId(UUID userId) {
+        return tRepo.findByUserId(userId);
     }
 }
