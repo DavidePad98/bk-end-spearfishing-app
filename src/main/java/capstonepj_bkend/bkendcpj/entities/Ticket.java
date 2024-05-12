@@ -22,6 +22,6 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user_id;
-    @OneToMany(mappedBy = "ticket")
+    @OneToMany(mappedBy = "ticketId")
     private List<Post> posts;
 }

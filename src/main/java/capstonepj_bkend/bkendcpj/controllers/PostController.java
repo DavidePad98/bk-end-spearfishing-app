@@ -1,6 +1,7 @@
 package capstonepj_bkend.bkendcpj.controllers;
 
 import capstonepj_bkend.bkendcpj.entities.Post;
+import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
 import capstonepj_bkend.bkendcpj.payloads.PostDTO;
 import capstonepj_bkend.bkendcpj.services.PostService;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -39,8 +41,8 @@ public class PostController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Post createPostCoversation(@RequestBody PostDTO ticket) {
-        return pService.createPost(ticket);
+    public Post createPostCoversation(@RequestBody PostDTO post) {
+        return pService.createPost(post);
     }
 
     @PutMapping("/{id}")
@@ -57,4 +59,8 @@ public class PostController {
         pService.deletePostCoversation(id);
     }
 
+    @GetMapping("/user/{authorId}")
+    public List<Post> getPostsByUserId(@PathVariable UUID authorId) {
+        return pService.getPostsByUserId(authorId);
+    }
 }

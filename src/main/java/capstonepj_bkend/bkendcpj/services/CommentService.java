@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -59,4 +60,7 @@ public class CommentService {
         return cRepo.save(existingComment);
     }
 
+    public List<Comment> findAllCommentsByUserId(UUID userId) {
+        return cRepo.findAllByAuthorId(userId);
+    }
 }

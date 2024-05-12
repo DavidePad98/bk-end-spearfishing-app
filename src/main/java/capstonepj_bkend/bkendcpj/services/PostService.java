@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -45,8 +46,8 @@ public class PostService {
                 .text(post.text())
                 .urlContent(post.urlContent())
                 .postCreationDate(LocalDate.now())
-                .ticket(foundTicket)
-                .authorId(found)
+                .ticketId(foundTicket)
+                .author(found)
                 .build();
         return pRepo.save(newPost);
     }
@@ -60,5 +61,9 @@ public class PostService {
         existingPost.setText(tk.text());
         existingPost.setUrlContent(tk.urlContent());
         return pRepo.save(existingPost);
+    }
+
+    public List<Post> getPostsByUserId(UUID authorId) {
+        return pRepo.findByUserId(authorId);
     }
 }

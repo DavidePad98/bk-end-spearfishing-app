@@ -57,6 +57,7 @@ public class UserService {
         newUser.setCity(uDTO.city());
         newUser.setRole(role);
         newUser.setRegistrationDate(LocalDateTime.now());
+        newUser.setProfileImage("https://i.fbcd.co/products/original/0800820e9ba97943b31f8ad5dfb9e0d20bdd2207a1c9028678f030122532260f.jpg");
 
         return uRepo.save(newUser);
     }

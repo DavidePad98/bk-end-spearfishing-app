@@ -1,7 +1,9 @@
 package capstonepj_bkend.bkendcpj.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Table(name = "posts")
-@JsonIgnoreProperties({"comments", "ticket"})
+@JsonIgnoreProperties({"comments", "ticketId"})
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -26,11 +28,13 @@ public class Post {
     private String urlContent;
     private LocalDate postCreationDate;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    @JsonManagedReference
     private List<Comment> comments;
     @ManyToOne
     @JoinColumn(name = "ticket_id", nullable = false)
-    private Ticket ticket;
+//    @JsonBackReference
+    private Ticket ticketId;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User authorId;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
 }

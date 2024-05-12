@@ -29,7 +29,9 @@ public record UserDTO(
 
         @NotBlank(message = "City is required")
         @Size(min = 3, message = "City must at least 3 characters long")
-        String city
+        String city,
+
+        String profileImage
 
 ) {
 }

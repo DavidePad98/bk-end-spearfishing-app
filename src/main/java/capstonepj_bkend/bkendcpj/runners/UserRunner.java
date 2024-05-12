@@ -27,7 +27,7 @@ public class UserRunner implements CommandLineRunner {
         }
 
         if (!uService.existsByEmail("admin@admin.admin")) {
-            uService.createUser(new UserDTO("admin", "admin", "admin" ,"admin@admin.admin", "password1234", "Napoli"), "ADMIN");
+            uService.createUser(new UserDTO("admin", "admin", "admin" ,"admin@admin.admin", "password1234", "Napoli", "https://i.fbcd.co/products/original/0800820e9ba97943b31f8ad5dfb9e0d20bdd2207a1c9028678f030122532260f.jpg"), "ADMIN");
         }
     }
 }

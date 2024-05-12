@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -52,4 +53,8 @@ public class CommentController {
         cService.deleteCommentCoversation(id);
     }
 
+    @GetMapping("/user/{id}")
+    public List<Comment> getAllCommentsByAuthorId(@PathVariable UUID id){
+        return cService.findAllCommentsByUserId(id);
+    }
 }

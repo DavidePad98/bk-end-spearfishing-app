@@ -42,7 +42,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user_id")
     private List<Ticket> tickets;
 
-    @OneToMany(mappedBy = "authorId")
+    @OneToMany(mappedBy = "author")
     private List<Post> posts;
 
     @OneToMany(mappedBy = "author")
