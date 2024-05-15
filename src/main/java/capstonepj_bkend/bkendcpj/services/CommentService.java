@@ -63,4 +63,8 @@ public class CommentService {
     public List<Comment> findAllCommentsByUserId(UUID userId) {
         return cRepo.findAllByAuthorId(userId);
     }
+
+    public List<Comment> findAllCommentsByPostId(UUID postId) {
+        return cRepo.findAllByPostId(postId);
+    }
 }

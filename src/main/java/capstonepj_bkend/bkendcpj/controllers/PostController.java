@@ -63,4 +63,9 @@ public class PostController {
     public List<Post> getPostsByUserId(@PathVariable UUID authorId) {
         return pService.getPostsByUserId(authorId);
     }
+
+    @GetMapping("/byTicket/{ticketId}")
+    public List<Post> getPostsByTicketId(@PathVariable UUID ticketId) {
+        return pService.findPostsByTicketId(ticketId);
+    }
 }

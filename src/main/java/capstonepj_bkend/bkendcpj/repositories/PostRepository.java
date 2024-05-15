@@ -4,6 +4,7 @@ import capstonepj_bkend.bkendcpj.entities.Post;
 import capstonepj_bkend.bkendcpj.entities.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface PostRepository extends JpaRepository<Post, UUID> {
 //    public Optional<Post> findByTitle(String title);
 @Query("SELECT p FROM Post p WHERE p.author.id = :author")
 List<Post> findByUserId(UUID author);
+
+    @Query(value = "SELECT p FROM Post p WHERE p.ticketId.id = :ticketId")
+    List<Post> findAllPostsByTicketId(@Param("ticketId") UUID ticketId);
+
 }

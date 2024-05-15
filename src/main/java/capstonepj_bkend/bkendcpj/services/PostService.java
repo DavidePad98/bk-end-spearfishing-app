@@ -66,4 +66,8 @@ public class PostService {
     public List<Post> getPostsByUserId(UUID authorId) {
         return pRepo.findByUserId(authorId);
     }
+
+    public List<Post> findPostsByTicketId(UUID ticketId) {
+        return pRepo.findAllPostsByTicketId(ticketId);
+    }
 }

@@ -57,4 +57,9 @@ public class CommentController {
     public List<Comment> getAllCommentsByAuthorId(@PathVariable UUID id){
         return cService.findAllCommentsByUserId(id);
     }
+
+    @GetMapping("/post/{postId}")
+    public List<Comment> getAllCommentsByPostId(@PathVariable UUID postId) {
+        return cService.findAllCommentsByPostId(postId);
+    }
 }
