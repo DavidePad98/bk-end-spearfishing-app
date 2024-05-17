@@ -3,6 +3,7 @@ package capstonepj_bkend.bkendcpj.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +20,7 @@ public class Ticket {
     @Setter(value = AccessLevel.NONE)
     private UUID id;
     private String title;
+    private LocalDate ticketCreationDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user_id;

@@ -3,6 +3,7 @@ package capstonepj_bkend.bkendcpj.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +19,7 @@ public class Comment {
     @Setter(value = AccessLevel.NONE)
     private UUID id;
     private String text;
+    private LocalDate commentCreationDate;
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;

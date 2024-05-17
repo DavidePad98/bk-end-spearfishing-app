@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +45,7 @@ public class CommentService {
         Post foundPost = pService.getPostById(UUID.fromString(post.postId()));
         Comment newComment = Comment.builder()
                 .text(post.text())
+                .commentCreationDate(LocalDate.now())
                 .post(foundPost)
                 .author(found)
                 .build();
