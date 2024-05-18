@@ -32,7 +32,7 @@ public class AuthService {
                 user.getName(),
                 user.getSurname(),
                 user.getEmail(),
-                passwordEncoder.encode(user.getPassword()),
+//                passwordEncoder.encode(user.getPassword()),
                 user.getCity(),
                 user.getSocial(),
                 user.getProfileImage()

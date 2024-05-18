@@ -19,8 +19,6 @@ public record LoginResponseDTO(
 
         String email,
 
-        String password,
-
         String city,
 
         String social,
