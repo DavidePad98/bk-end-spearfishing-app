@@ -4,8 +4,10 @@ import capstonepj_bkend.bkendcpj.entities.Post;
 import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
+import capstonepj_bkend.bkendcpj.payloads.EditTicketDTO;
 import capstonepj_bkend.bkendcpj.payloads.TicketDTO;
 import capstonepj_bkend.bkendcpj.repositories.TicketRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
@@ -54,11 +56,10 @@ public class TicketService {
         tRepo.deleteById(id);
     }
 
-    public Ticket updateTicketCoversation(UUID id, TicketDTO tk) {
-        Ticket existingTicket = tRepo.findById(id).orElseThrow(() -> new BadRequestException("Ticket not found"));
-//        if (tRepo.existByTitle(tk.title()) && !existingTicket.getTitle().equals(tk.title())) {
-//            throw new BadRequestException("Ticket title already in use");
-//        }
+    public Ticket updateTicketCoversation(UUID id, @Valid EditTicketDTO tk) {
+        Ticket existingTicket = tRepo.findById(id)
+                .orElseThrow(() -> new BadRequestException("Ticket not found"));
+
         existingTicket.setTitle(tk.title());
         return tRepo.save(existingTicket);
     }

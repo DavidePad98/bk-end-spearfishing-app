@@ -3,6 +3,7 @@ package capstonepj_bkend.bkendcpj.controllers;
 import capstonepj_bkend.bkendcpj.entities.Comment;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
 import capstonepj_bkend.bkendcpj.payloads.CommentDTO;
+import capstonepj_bkend.bkendcpj.payloads.EditCommentDTO;
 import capstonepj_bkend.bkendcpj.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,7 +41,7 @@ public class CommentController {
     }
 
     @PutMapping("/{id}")
-    public Comment updateComment(@PathVariable UUID id, @RequestBody @Validated CommentDTO ticket, BindingResult validation) {
+    public Comment updateComment(@PathVariable UUID id, @RequestBody @Validated EditCommentDTO ticket, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new BadRequestException("Invalid data", validation.getAllErrors());
         }

@@ -3,6 +3,7 @@ package capstonepj_bkend.bkendcpj.controllers;
 import capstonepj_bkend.bkendcpj.entities.Post;
 import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
+import capstonepj_bkend.bkendcpj.payloads.EditPostDTO;
 import capstonepj_bkend.bkendcpj.payloads.PostDTO;
 import capstonepj_bkend.bkendcpj.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public Post updatePostCoversation(@PathVariable UUID id, @RequestBody @Validated PostDTO ticket, BindingResult validation) {
+    public Post updatePostCoversation(@PathVariable UUID id, @RequestBody @Validated EditPostDTO ticket, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new BadRequestException("Invalid data", validation.getAllErrors());
         }

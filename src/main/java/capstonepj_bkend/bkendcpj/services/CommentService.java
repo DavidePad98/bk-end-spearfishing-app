@@ -6,6 +6,7 @@ import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
 import capstonepj_bkend.bkendcpj.payloads.CommentDTO;
+import capstonepj_bkend.bkendcpj.payloads.EditCommentDTO;
 import capstonepj_bkend.bkendcpj.payloads.PostDTO;
 import capstonepj_bkend.bkendcpj.repositories.CommentRepository;
 import capstonepj_bkend.bkendcpj.repositories.PostRepository;
@@ -56,7 +57,7 @@ public class CommentService {
         cRepo.deleteById(id);
     }
 
-    public Comment updateCommentCoversation(UUID id, CommentDTO tk) {
+    public Comment updateCommentCoversation(UUID id, EditCommentDTO tk) {
         Comment existingComment = cRepo.findById(id).orElseThrow(() -> new BadRequestException("Comment not found"));
         existingComment.setText(tk.text());
         return cRepo.save(existingComment);

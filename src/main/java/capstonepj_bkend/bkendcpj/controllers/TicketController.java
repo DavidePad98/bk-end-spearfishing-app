@@ -2,6 +2,7 @@ package capstonepj_bkend.bkendcpj.controllers;
 
 import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
+import capstonepj_bkend.bkendcpj.payloads.EditTicketDTO;
 import capstonepj_bkend.bkendcpj.payloads.TicketDTO;
 import capstonepj_bkend.bkendcpj.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class TicketController {
     }
 
     @PutMapping("/{id}")
-    public Ticket updateTicketCoversation(@PathVariable UUID id, @RequestBody @Validated TicketDTO ticket, BindingResult validation) {
+    public Ticket updateTicket(@PathVariable UUID id, @RequestBody @Validated EditTicketDTO ticket, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new BadRequestException("Invalid data", validation.getAllErrors());
         }

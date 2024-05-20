@@ -4,6 +4,7 @@ import capstonepj_bkend.bkendcpj.entities.Post;
 import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
+import capstonepj_bkend.bkendcpj.payloads.EditPostDTO;
 import capstonepj_bkend.bkendcpj.payloads.PostDTO;
 import capstonepj_bkend.bkendcpj.payloads.TicketDTO;
 import capstonepj_bkend.bkendcpj.repositories.PostRepository;
@@ -56,7 +57,7 @@ public class PostService {
         pRepo.deleteById(id);
     }
 
-    public Post updatePostCoversation(UUID id, PostDTO tk) {
+    public Post updatePostCoversation(UUID id, EditPostDTO tk) {
         Post existingPost = pRepo.findById(id).orElseThrow(() -> new BadRequestException("Post not found"));
         existingPost.setText(tk.text());
         existingPost.setUrlContent(tk.urlContent());
