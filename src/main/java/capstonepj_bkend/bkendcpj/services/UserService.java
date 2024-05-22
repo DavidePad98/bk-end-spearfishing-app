@@ -7,6 +7,8 @@ import capstonepj_bkend.bkendcpj.payloads.ProfileImageUrlDTO;
 import capstonepj_bkend.bkendcpj.payloads.SocialDTO;
 import capstonepj_bkend.bkendcpj.payloads.UserDTO;
 import capstonepj_bkend.bkendcpj.repositories.UserRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,8 +16,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -29,6 +34,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     public User getUserById(UUID id) {
         return uRepo.findById(id).orElseThrow(() -> new BadRequestException("User not found with id: " + id));
@@ -57,7 +65,7 @@ public class UserService {
         newUser.setCity(uDTO.city());
         newUser.setRole(role);
         newUser.setRegistrationDate(LocalDateTime.now());
-        newUser.setProfileImage("https://i.fbcd.co/products/original/0800820e9ba97943b31f8ad5dfb9e0d20bdd2207a1c9028678f030122532260f.jpg");
+//        newUser.setProfileImage("https://i.fbcd.co/products/original/0800820e9ba97943b31f8ad5dfb9e0d20bdd2207a1c9028678f030122532260f.jpg");
 
         return uRepo.save(newUser);
     }
@@ -84,21 +92,41 @@ public class UserService {
         return uRepo.save(newUser);
     }
 
-    public User updateUser(UUID id, UserDTO uDTO) {
+//    public User updateUser(UUID id, UserDTO uDTO, MultipartFile profileImage) throws IOException {
+//        User existingUser = uRepo.findById(id).orElseThrow(() -> new BadRequestException("User not found"));
+//
+//        if (profileImage != null && !profileImage.isEmpty()) {
+//            Map uploadResult = cloudinary.uploader().upload(profileImage.getBytes(), ObjectUtils.emptyMap());
+//            String imageUrl = (String) uploadResult.get("url");
+//            existingUser.setProfileImage(imageUrl);
+//        }
+//
+//        existingUser.setNickname(uDTO.nickname());
+//        existingUser.setName(uDTO.name());
+//        existingUser.setSurname(uDTO.surname());
+//        existingUser.setEmail(uDTO.email());
+//        existingUser.setPassword(passwordEncoder.encode(uDTO.password()));
+//        existingUser.setCity(uDTO.city());
+//
+//        return uRepo.save(existingUser);
+//    }
+
+    public User updateUser(UUID id, String nickname, String name, String surname, String email, String password, String city, String social, MultipartFile profileImage) throws IOException {
         User existingUser = uRepo.findById(id).orElseThrow(() -> new BadRequestException("User not found"));
-        if (uRepo.existsByNicknameOrEmail(uDTO.nickname(), uDTO.email()) && !existingUser.getNickname().equals(uDTO.nickname()) && !existingUser.getEmail().equals(uDTO.email())) {
-            throw new BadRequestException("Nickname and email already in use");
-        } else if (uRepo.existsByNickname(uDTO.nickname()) && !existingUser.getNickname().equals(uDTO.nickname())) {
-            throw new BadRequestException("Nickname already in use");
-        } else if (uRepo.existsByEmail(uDTO.email()) && !existingUser.getEmail().equals(uDTO.email())) {
-            throw new BadRequestException("Email already in use");
+
+        if (profileImage != null && !profileImage.isEmpty()) {
+            Map uploadResult = cloudinary.uploader().upload(profileImage.getBytes(), ObjectUtils.emptyMap());
+            String imageUrl = (String) uploadResult.get("url");
+            existingUser.setProfileImage(imageUrl);
         }
-        existingUser.setNickname(uDTO.nickname());
-        existingUser.setName(uDTO.name());
-        existingUser.setSurname(uDTO.surname());
-        existingUser.setEmail(uDTO.email());
-        existingUser.setPassword(passwordEncoder.encode(uDTO.password()));
-        existingUser.setCity(uDTO.city());
+
+        existingUser.setNickname(nickname);
+        existingUser.setName(name);
+        existingUser.setSurname(surname);
+        existingUser.setEmail(email);
+        existingUser.setPassword(passwordEncoder.encode(password));
+        existingUser.setCity(city);
+        existingUser.setSocial(social);
 
         return uRepo.save(existingUser);
     }

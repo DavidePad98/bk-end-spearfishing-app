@@ -8,16 +8,19 @@ import capstonepj_bkend.bkendcpj.payloads.EditPostDTO;
 import capstonepj_bkend.bkendcpj.payloads.PostDTO;
 import capstonepj_bkend.bkendcpj.payloads.TicketDTO;
 import capstonepj_bkend.bkendcpj.repositories.PostRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class PostService {
@@ -31,6 +34,9 @@ public class PostService {
     @Autowired
     private TicketService tService;
 
+    @Autowired
+    private Cloudinary cloudinary;
+
     public Post getPostById(UUID id) {
         return pRepo.findById(id).orElseThrow(() -> new BadRequestException("Post not found"));
     }
@@ -40,28 +46,58 @@ public class PostService {
         return pRepo.findAll(pageable);
     }
 
-    public Post createPost(PostDTO post) {
-        User found = uService.getUserById(UUID.fromString(post.authorId()));
-        Ticket foundTicket = tService.getTicketCoversation(UUID.fromString(post.ticketId()));
-        Post newPost = Post.builder()
-                .text(post.text())
-                .urlContent(post.urlContent())
+//    public Post createPost(PostDTO post) {
+//        User found = uService.getUserById(UUID.fromString(post.authorId()));
+//        Ticket foundTicket = tService.getTicketCoversation(UUID.fromString(post.ticketId()));
+//        Post newPost = Post.builder()
+//                .text(post.text())
+//                .urlContent(post.urlContent())
+//                .postCreationDate(LocalDate.now())
+//                .ticketId(foundTicket)
+//                .author(found)
+//                .build();
+//        return pRepo.save(newPost);
+//    }
+
+    public Post createPost(String authorId, String ticketId, String text, MultipartFile image) throws IOException {
+
+        // Carica l'immagine su Cloudinary
+        Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+
+        // Recupera l'URL dell'immagine caricata
+        String imageUrl = (String) uploadResult.get("url");
+
+        // Recupera l'utente e il ticket
+        User foundUser = uService.getUserById(UUID.fromString(authorId));
+        Ticket foundTicket = tService.getTicketCoversation(UUID.fromString(ticketId));
+
+        // Crea e salva il nuovo post
+        Post post = Post.builder()
+                .text(text)
+                .urlContent(imageUrl)
                 .postCreationDate(LocalDate.now())
                 .ticketId(foundTicket)
-                .author(found)
+                .author(foundUser)
                 .build();
-        return pRepo.save(newPost);
+
+        return pRepo.save(post);
+    }
+
+    public Post updatePostCoversation(UUID id, String text, MultipartFile image) throws IOException {
+        Post existingPost = pRepo.findById(id).orElseThrow(() -> new BadRequestException("Post not found"));
+
+        if (image != null && !image.isEmpty()) {
+            Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+            String imageUrl = (String) uploadResult.get("url");
+            existingPost.setUrlContent(imageUrl);
+        }
+
+        existingPost.setText(text);
+        return pRepo.save(existingPost);
     }
 
     public void deletePostCoversation(UUID id) {
         pRepo.deleteById(id);
-    }
-
-    public Post updatePostCoversation(UUID id, EditPostDTO tk) {
-        Post existingPost = pRepo.findById(id).orElseThrow(() -> new BadRequestException("Post not found"));
-        existingPost.setText(tk.text());
-        existingPost.setUrlContent(tk.urlContent());
-        return pRepo.save(existingPost);
     }
 
     public List<Post> getPostsByUserId(UUID authorId) {

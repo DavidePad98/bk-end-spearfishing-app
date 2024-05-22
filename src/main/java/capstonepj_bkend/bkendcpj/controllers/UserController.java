@@ -5,6 +5,7 @@ import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
 import capstonepj_bkend.bkendcpj.payloads.ProfileImageUrlDTO;
 import capstonepj_bkend.bkendcpj.payloads.SocialDTO;
 import capstonepj_bkend.bkendcpj.payloads.UserDTO;
+import capstonepj_bkend.bkendcpj.repositories.UserRepository;
 import capstonepj_bkend.bkendcpj.services.UserService;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -23,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserService uService;
+
+    @Autowired
+    private UserRepository uRepo;
 
     @GetMapping
     public Page<User> getAllUsers(@RequestParam(defaultValue = "0") int page,
@@ -36,33 +43,63 @@ public class UserController {
         return uService.getUserById(id);
     }
 
+//    @PutMapping("/{id}")
+//    public User updateUser(@PathVariable UUID id,
+//                           @RequestPart @Validated UserDTO utenteDTO,
+//                           @RequestPart(required = false) MultipartFile profileImage,
+//                           BindingResult validation) throws IOException {
+//
+//        System.out.println("Received utenteDTO: " + utenteDTO);
+//        System.out.println("Received profileImage: " + profileImage);
+//
+//        if (validation.hasErrors()) {
+//            throw new BadRequestException("Invalid data", validation.getAllErrors());
+//        }
+//        return uService.updateUser(id, utenteDTO, profileImage);
+//    }
+
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable UUID id, @RequestBody @Validated UserDTO utenteDTO, BindingResult validation) {
+    public User updateUser(@PathVariable UUID id,
+//                           @RequestPart @Validated UserDTO utenteDTO,
+                           @RequestPart String nickname,
+                           @RequestPart String name,
+                           @RequestPart String surname,
+                           @RequestPart String email,
+                           @RequestPart String password,
+                           @RequestPart String city,
+                           @RequestPart String social,
+                           @RequestPart(required = false) MultipartFile profileImage,
+                           BindingResult validation) throws IOException {
         if (validation.hasErrors()) {
             throw new BadRequestException("Invalid data", validation.getAllErrors());
         }
-        return uService.updateUser(id, utenteDTO);
+        return uService.updateUser(id, nickname, name, surname, email, password, city, social, profileImage);
     }
 
-    @PutMapping("/{id}/social")
-    public User updateSocial(@PathVariable UUID id, @RequestBody @Validated SocialDTO socialDTO, BindingResult validation) {
-        if (validation.hasErrors()) {
-            throw new BadRequestException("Invalid data", validation.getAllErrors());
-        }
-        return uService.uploadSocial(id, socialDTO);
-    }
+//    @PutMapping("/{id}/social")
+//    public User updateSocial(@PathVariable UUID id, @RequestBody @Validated SocialDTO socialDTO, BindingResult validation) {
+//        if (validation.hasErrors()) {
+//            throw new BadRequestException("Invalid data", validation.getAllErrors());
+//        }
+//        return uService.uploadSocial(id, socialDTO);
+//    }
 
-    @PutMapping("/{id}/profileImage")
-    public User updateProfileImage(@PathVariable UUID id, @RequestBody @Validated ProfileImageUrlDTO piDTO, BindingResult validation) {
-        if (validation.hasErrors()) {
-            throw new BadRequestException("Invalid data", validation.getAllErrors());
-        }
-        return uService.uploadProfileImageWithUrl(id, piDTO);
-    }
+//    @PutMapping("/{id}/profileImage")
+//    public User updateProfileImage(@PathVariable UUID id, @RequestBody @Validated ProfileImageUrlDTO piDTO, BindingResult validation) {
+//        if (validation.hasErrors()) {
+//            throw new BadRequestException("Invalid data", validation.getAllErrors());
+//        }
+//        return uService.uploadProfileImageWithUrl(id, piDTO);
+//    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUtente(@PathVariable UUID id) {
         uService.deleteUser(id);
+    }
+
+    @GetMapping("/search")
+    public List<User> searchUsers(@RequestParam String query) {
+        return uRepo.searchByName(query);
     }
 }

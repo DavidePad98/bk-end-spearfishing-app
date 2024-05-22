@@ -12,6 +12,7 @@ import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.io.IOException;
@@ -52,5 +53,11 @@ public class ExceptionsHandler {
     public ErrorDTO handleGenericErrors(Exception ex){
         ex.printStackTrace();
         return new ErrorDTO("There are some server problems", LocalDateTime.now());
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
+    public ErrorDTO handleMaxSizeException(MaxUploadSizeExceededException exc) {
+        return new ErrorDTO("File too large! Maximum allowed size is 10MB.",LocalDateTime.now() );
     }
 }

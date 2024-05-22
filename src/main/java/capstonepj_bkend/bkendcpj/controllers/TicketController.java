@@ -4,6 +4,7 @@ import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
 import capstonepj_bkend.bkendcpj.payloads.EditTicketDTO;
 import capstonepj_bkend.bkendcpj.payloads.TicketDTO;
+import capstonepj_bkend.bkendcpj.repositories.TicketRepository;
 import capstonepj_bkend.bkendcpj.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,9 @@ public class TicketController {
 
     @Autowired
     private TicketService tService;
+
+    @Autowired
+    private TicketRepository tRepo;
 
     @GetMapping
     public Page<Ticket> getAllTickets(@RequestParam(defaultValue = "0") int page,
@@ -63,5 +67,10 @@ public class TicketController {
     @GetMapping("/user/{userId}")
     public List<Ticket> getTicketsByUserId(@PathVariable UUID userId) {
         return tService.getTicketsByUserId(userId);
+    }
+
+    @GetMapping("/search")
+    public List<Ticket> searchTickets(@RequestParam String query) {
+        return tRepo.searchByTitle(query);
     }
 }

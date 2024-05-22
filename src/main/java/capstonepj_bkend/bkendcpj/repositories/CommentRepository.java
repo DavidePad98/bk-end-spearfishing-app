@@ -16,4 +16,7 @@ public interface CommentRepository extends JpaRepository<Comment, UUID> {
 
     @Query("SELECT c FROM Comment c WHERE c.post.id = :postId")
     List<Comment> findAllByPostId(@Param("postId") UUID postId);
+
+    @Query("SELECT c FROM Comment c WHERE LOWER(c.text) LIKE LOWER(CONCAT('%', :query, '%'))")
+    List<Comment> searchByText(@Param("query") String query);
 }

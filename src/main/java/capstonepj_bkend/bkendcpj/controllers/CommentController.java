@@ -4,6 +4,7 @@ import capstonepj_bkend.bkendcpj.entities.Comment;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
 import capstonepj_bkend.bkendcpj.payloads.CommentDTO;
 import capstonepj_bkend.bkendcpj.payloads.EditCommentDTO;
+import capstonepj_bkend.bkendcpj.repositories.CommentRepository;
 import capstonepj_bkend.bkendcpj.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,9 @@ public class CommentController {
 
     @Autowired
     private CommentService cService;
+
+    @Autowired
+    private CommentRepository cRepo;
 
     @GetMapping
     public Page<Comment> getAllComments(@RequestParam(defaultValue = "0") int page,
@@ -62,5 +66,10 @@ public class CommentController {
     @GetMapping("/post/{postId}")
     public List<Comment> getAllCommentsByPostId(@PathVariable UUID postId) {
         return cService.findAllCommentsByPostId(postId);
+    }
+
+    @GetMapping("/search")
+    public List<Comment> searchComments(@RequestParam String query) {
+        return cRepo.searchByText(query);
     }
 }
