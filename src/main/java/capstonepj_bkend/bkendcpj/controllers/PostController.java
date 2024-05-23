@@ -85,7 +85,7 @@ public class PostController {
     public Post createPost(@RequestParam("authorId") String authorId,
                            @RequestParam("ticketId") String ticketId,
                            @RequestParam("text") String text,
-                           @RequestParam("image") MultipartFile image) {
+                           @RequestParam(value = "image", required = false) MultipartFile image) {
         try {
             PostDTO postDTO = new PostDTO(text, null, ticketId, authorId);
             return pService.createPost(authorId, ticketId, text, image);

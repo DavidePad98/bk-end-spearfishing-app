@@ -46,26 +46,14 @@ public class PostService {
         return pRepo.findAll(pageable);
     }
 
-//    public Post createPost(PostDTO post) {
-//        User found = uService.getUserById(UUID.fromString(post.authorId()));
-//        Ticket foundTicket = tService.getTicketCoversation(UUID.fromString(post.ticketId()));
-//        Post newPost = Post.builder()
-//                .text(post.text())
-//                .urlContent(post.urlContent())
-//                .postCreationDate(LocalDate.now())
-//                .ticketId(foundTicket)
-//                .author(found)
-//                .build();
-//        return pRepo.save(newPost);
-//    }
-
     public Post createPost(String authorId, String ticketId, String text, MultipartFile image) throws IOException {
+        String imageUrl = null;
 
-        // Carica l'immagine su Cloudinary
-        Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
-
-        // Recupera l'URL dell'immagine caricata
-        String imageUrl = (String) uploadResult.get("url");
+        // Carica l'immagine su Cloudinary solo se presente
+        if (image != null && !image.isEmpty()) {
+            Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+            imageUrl = (String) uploadResult.get("url");
+        }
 
         // Recupera l'utente e il ticket
         User foundUser = uService.getUserById(UUID.fromString(authorId));
@@ -74,7 +62,7 @@ public class PostService {
         // Crea e salva il nuovo post
         Post post = Post.builder()
                 .text(text)
-                .urlContent(imageUrl)
+                .urlContent(imageUrl) // può essere null se l'immagine non è presente
                 .postCreationDate(LocalDate.now())
                 .ticketId(foundTicket)
                 .author(foundUser)

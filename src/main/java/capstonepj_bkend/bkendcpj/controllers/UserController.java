@@ -43,21 +43,6 @@ public class UserController {
         return uService.getUserById(id);
     }
 
-//    @PutMapping("/{id}")
-//    public User updateUser(@PathVariable UUID id,
-//                           @RequestPart @Validated UserDTO utenteDTO,
-//                           @RequestPart(required = false) MultipartFile profileImage,
-//                           BindingResult validation) throws IOException {
-//
-//        System.out.println("Received utenteDTO: " + utenteDTO);
-//        System.out.println("Received profileImage: " + profileImage);
-//
-//        if (validation.hasErrors()) {
-//            throw new BadRequestException("Invalid data", validation.getAllErrors());
-//        }
-//        return uService.updateUser(id, utenteDTO, profileImage);
-//    }
-
     @PutMapping("/{id}")
     public User updateUser(@PathVariable UUID id,
 //                           @RequestPart @Validated UserDTO utenteDTO,
@@ -75,22 +60,6 @@ public class UserController {
         }
         return uService.updateUser(id, nickname, name, surname, email, password, city, social, profileImage);
     }
-
-//    @PutMapping("/{id}/social")
-//    public User updateSocial(@PathVariable UUID id, @RequestBody @Validated SocialDTO socialDTO, BindingResult validation) {
-//        if (validation.hasErrors()) {
-//            throw new BadRequestException("Invalid data", validation.getAllErrors());
-//        }
-//        return uService.uploadSocial(id, socialDTO);
-//    }
-
-//    @PutMapping("/{id}/profileImage")
-//    public User updateProfileImage(@PathVariable UUID id, @RequestBody @Validated ProfileImageUrlDTO piDTO, BindingResult validation) {
-//        if (validation.hasErrors()) {
-//            throw new BadRequestException("Invalid data", validation.getAllErrors());
-//        }
-//        return uService.uploadProfileImageWithUrl(id, piDTO);
-//    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

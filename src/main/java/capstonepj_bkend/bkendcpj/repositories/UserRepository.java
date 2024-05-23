@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     boolean existsByEmail(String email);
 
-    @Query("SELECT u FROM User u WHERE u.role.role <> 'ADMIN' AND (u.name LIKE %:query% OR u.surname LIKE %:query% OR u.nickname LIKE %:query%)")
+    @Query("SELECT u FROM User u WHERE u.role.role <> 'ADMIN' AND (LOWER(u.name) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(u.surname) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(u.nickname) LIKE LOWER(CONCAT('%', :query, '%')))")
     List<User> searchByName(@Param("query") String query);
 }
