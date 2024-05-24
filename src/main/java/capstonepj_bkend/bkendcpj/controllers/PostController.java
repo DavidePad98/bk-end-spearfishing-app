@@ -1,9 +1,7 @@
 package capstonepj_bkend.bkendcpj.controllers;
 
 import capstonepj_bkend.bkendcpj.entities.Post;
-import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
-import capstonepj_bkend.bkendcpj.payloads.EditPostDTO;
 import capstonepj_bkend.bkendcpj.payloads.PostDTO;
 import capstonepj_bkend.bkendcpj.repositories.PostRepository;
 import capstonepj_bkend.bkendcpj.services.PostService;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,17 +37,6 @@ public class PostController {
     public Post getPost(@PathVariable UUID id) {
         return pService.getPostById(id);
     }
-
-//    @GetMapping("/text/{title}")
-//    public Post findByPostTitle(@PathVariable String title) {
-//        return pService.getPostByTitle(title);
-//    }
-
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Post createPostCoversation(@RequestBody PostDTO post) {
-//        return pService.createPost(post);
-//    }
 
     @PutMapping("/{id}")
     public Post updatePostCoversation(@PathVariable UUID id,

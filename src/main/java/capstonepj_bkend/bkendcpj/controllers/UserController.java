@@ -45,7 +45,6 @@ public class UserController {
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable UUID id,
-//                           @RequestPart @Validated UserDTO utenteDTO,
                            @RequestPart String nickname,
                            @RequestPart String name,
                            @RequestPart String surname,

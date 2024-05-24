@@ -49,20 +49,17 @@ public class PostService {
     public Post createPost(String authorId, String ticketId, String text, MultipartFile image) throws IOException {
         String imageUrl = null;
 
-        // Carica l'immagine su Cloudinary solo se presente
         if (image != null && !image.isEmpty()) {
             Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
             imageUrl = (String) uploadResult.get("url");
         }
 
-        // Recupera l'utente e il ticket
         User foundUser = uService.getUserById(UUID.fromString(authorId));
         Ticket foundTicket = tService.getTicketCoversation(UUID.fromString(ticketId));
 
-        // Crea e salva il nuovo post
         Post post = Post.builder()
                 .text(text)
-                .urlContent(imageUrl) // può essere null se l'immagine non è presente
+                .urlContent(imageUrl)
                 .postCreationDate(LocalDate.now())
                 .ticketId(foundTicket)
                 .author(foundUser)

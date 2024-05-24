@@ -1,6 +1,5 @@
 package capstonepj_bkend.bkendcpj.services;
 
-import capstonepj_bkend.bkendcpj.entities.Post;
 import capstonepj_bkend.bkendcpj.entities.Ticket;
 import capstonepj_bkend.bkendcpj.entities.User;
 import capstonepj_bkend.bkendcpj.exceptions.BadRequestException;
@@ -9,7 +8,6 @@ import capstonepj_bkend.bkendcpj.payloads.TicketDTO;
 import capstonepj_bkend.bkendcpj.repositories.TicketRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

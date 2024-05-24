@@ -65,8 +65,6 @@ public class UserService {
         newUser.setCity(uDTO.city());
         newUser.setRole(role);
         newUser.setRegistrationDate(LocalDateTime.now());
-//        newUser.setProfileImage("https://i.fbcd.co/products/original/0800820e9ba97943b31f8ad5dfb9e0d20bdd2207a1c9028678f030122532260f.jpg");
-
         return uRepo.save(newUser);
     }
 
@@ -91,25 +89,6 @@ public class UserService {
 
         return uRepo.save(newUser);
     }
-
-//    public User updateUser(UUID id, UserDTO uDTO, MultipartFile profileImage) throws IOException {
-//        User existingUser = uRepo.findById(id).orElseThrow(() -> new BadRequestException("User not found"));
-//
-//        if (profileImage != null && !profileImage.isEmpty()) {
-//            Map uploadResult = cloudinary.uploader().upload(profileImage.getBytes(), ObjectUtils.emptyMap());
-//            String imageUrl = (String) uploadResult.get("url");
-//            existingUser.setProfileImage(imageUrl);
-//        }
-//
-//        existingUser.setNickname(uDTO.nickname());
-//        existingUser.setName(uDTO.name());
-//        existingUser.setSurname(uDTO.surname());
-//        existingUser.setEmail(uDTO.email());
-//        existingUser.setPassword(passwordEncoder.encode(uDTO.password()));
-//        existingUser.setCity(uDTO.city());
-//
-//        return uRepo.save(existingUser);
-//    }
 
     public User updateUser(UUID id, String nickname, String name, String surname, String email, String password, String city, String social, MultipartFile profileImage) throws IOException {
         User existingUser = uRepo.findById(id).orElseThrow(() -> new BadRequestException("User not found"));

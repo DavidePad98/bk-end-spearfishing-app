@@ -1,10 +1,5 @@
 package capstonepj_bkend.bkendcpj.payloads;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.URL;
-
 import java.util.UUID;
 
 public record LoginResponseDTO(
