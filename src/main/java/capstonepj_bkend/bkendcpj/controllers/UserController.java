@@ -51,7 +51,7 @@ public class UserController {
                            @RequestPart String email,
                            @RequestPart String password,
                            @RequestPart String city,
-                           @RequestPart String social,
+                           @RequestPart(required = false) String social,
                            @RequestPart(required = false) MultipartFile profileImage,
                            BindingResult validation) throws IOException {
         if (validation.hasErrors()) {

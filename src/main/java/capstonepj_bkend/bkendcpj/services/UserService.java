@@ -105,7 +105,9 @@ public class UserService {
         existingUser.setEmail(email);
         existingUser.setPassword(passwordEncoder.encode(password));
         existingUser.setCity(city);
-        existingUser.setSocial(social);
+        if (social != null) {
+            existingUser.setSocial(social);
+        }
 
         return uRepo.save(existingUser);
     }

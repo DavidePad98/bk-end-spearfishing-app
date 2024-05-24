@@ -22,3 +22,66 @@ Using generated security password: 3d8164ab-a019-4d13-b5d2-b9fa991d9ef6
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
+2024-05-24T12:22:17.996+02:00  WARN 6140 --- [bk-end-cpj] [http-nio-3001-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.multipart.support.MissingServletRequestPartException: Required part 'social' is not present.]
+2024-05-24T12:24:48.714+02:00  WARN 9776 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T12:24:48.786+02:00  WARN 9776 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f3e89f5f-0e5d-4553-8d35-e32864d08a62
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-05-24T12:24:58.360+02:00  WARN 9776 --- [bk-end-cpj] [http-nio-3001-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.multipart.support.MissingServletRequestPartException: Required part 'social' is not present.]
+2024-05-24T12:27:16.750+02:00  WARN 24728 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T12:27:16.809+02:00  WARN 24728 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: dcb2e6f3-bc18-4bd6-92f7-2dc01a399ed9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-05-24T12:27:28.986+02:00  WARN 24728 --- [bk-end-cpj] [http-nio-3001-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.multipart.support.MissingServletRequestPartException: Required part 'social' is not present.]
+2024-05-24T12:28:17.182+02:00  WARN 24728 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T12:28:17.199+02:00  WARN 24728 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: cf091679-b4ab-4070-b2e3-11184cbce90f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-05-24T12:28:19.141+02:00  WARN 24728 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T12:28:19.157+02:00  WARN 24728 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b12c6e5b-594a-4f0f-a03e-a9bf28accf1a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-05-24T12:28:40.531+02:00  WARN 13304 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T12:28:40.594+02:00  WARN 13304 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f3ef8ae1-a832-4832-a1d1-48eb61df0140
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-05-24T12:39:01.157+02:00  WARN 13304 --- [bk-end-cpj] [http-nio-3001-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; Invalid UUID string: undefined]
+2024-05-24T13:25:26.118+02:00  WARN 27928 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T13:25:26.174+02:00  WARN 27928 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 8ae20546-f213-4593-947e-78c1a8fe99eb
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-05-24T13:56:13.261+02:00  WARN 27928 --- [bk-end-cpj] [http-nio-3001-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [capstonepj_bkend.bkendcpj.exceptions.UnauthorizedException: Credentials not valid. Try login again]
+2024-05-24T13:56:14.488+02:00  WARN 27928 --- [bk-end-cpj] [http-nio-3001-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [capstonepj_bkend.bkendcpj.exceptions.UnauthorizedException: Credentials not valid. Try login again]
+2024-05-24T13:56:17.359+02:00  WARN 27928 --- [bk-end-cpj] [http-nio-3001-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [capstonepj_bkend.bkendcpj.exceptions.UnauthorizedException: Credentials not valid. Try login again]
+2024-05-24T14:02:50.470+02:00  WARN 18260 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T14:02:50.533+02:00  WARN 18260 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7eda8dc8-25cb-4c60-a75c-90d5482fa333
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-05-24T14:09:53.588+02:00  WARN 27708 --- [bk-end-cpj] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-24T14:09:53.650+02:00  WARN 27708 --- [bk-end-cpj] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9413f9b4-bfa4-43ac-8296-3fd59281af9e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
