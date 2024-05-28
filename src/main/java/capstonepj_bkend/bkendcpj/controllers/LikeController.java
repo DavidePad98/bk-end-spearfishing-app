@@ -29,9 +29,15 @@ public class LikeController {
         return lService.getLikesForComment(commentId);
     }
 
-    @GetMapping("/user/{userId}")
-    public List<LikeResponse> getLikesForUser(@PathVariable UUID userId) {
-        return lService.getLikesForUser(userId);
+    @GetMapping("/user")
+    public List<LikeResponse> getLikesForUser(@RequestParam(required = false) UUID userId, @PathVariable(required = false) UUID id) {
+        if (userId != null) {
+            return lService.getLikesForUser(userId);
+        } else if (id != null) {
+            return lService.getLikesForUser(id);
+        } else {
+            throw new IllegalArgumentException("User ID is required");
+        }
     }
 
     @PostMapping("/ticket/{ticketId}")

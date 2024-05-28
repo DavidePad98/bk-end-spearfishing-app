@@ -1,6 +1,5 @@
 package capstonepj_bkend.bkendcpj.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +16,6 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @Table(name = "commenti")
-@JsonIgnoreProperties({ "likes"})
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,5 +30,6 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User author;
     @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Like> likes = new ArrayList<>();
 }

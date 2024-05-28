@@ -1,7 +1,6 @@
 package capstonepj_bkend.bkendcpj.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "likes")
-@JsonIgnoreProperties({"coomment", "post", "ticket"})
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,14 +26,17 @@ public class Like {
 
     @ManyToOne
     @JoinColumn(name = "comment_id")
+    @JsonBackReference
     private Comment comment;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
+    @JsonBackReference
     private Post post;
 
     @ManyToOne
     @JoinColumn(name = "ticket_id")
+    @JsonBackReference
     private Ticket ticket;
 
 }

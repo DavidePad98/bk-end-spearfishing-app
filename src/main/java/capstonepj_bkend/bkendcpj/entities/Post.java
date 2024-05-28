@@ -17,7 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Table(name = "posts")
-@JsonIgnoreProperties({"comments", "ticketId", "likes"})
+@JsonIgnoreProperties({"comments", "ticketId"})
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,5 +35,6 @@ public class Post {
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Like> likes = new ArrayList<>();
 }
